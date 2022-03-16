@@ -1,24 +1,18 @@
-import './App.css';
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./views/home";
+import Launches from "./views/launches";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-     
-        <img src="assets/img/globe2.png" className="App-logo" alt="logo" />
-        <p>
-          Bienvenue dans le monde de l'espace  <br/> Accéder à toutes les informations sur les lancements des fusées.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Immersion maintenant
-        </a>
-      </header>
-    </div>
+  return (  
+
+    <BrowserRouter>
+      <Routes>
+          <Route index element={<Home />} />
+          <Route path="launches" element={<Launches />} />
+      </Routes>
+    </BrowserRouter>
+   
   );
 }
 
