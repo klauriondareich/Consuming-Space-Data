@@ -44,8 +44,9 @@
 }
 
 .main-container{
-  width: 80%;
+  width: 60%;
   margin: auto;
+  padding-bottom: 100px;
 }
 .content-element{
   background-color: #f5f7f8;
@@ -54,6 +55,7 @@
   padding: 10px;
   display: inline-block;
   margin-right: 20px;
+  margin-bottom: 30px;
 }
 .width-500{
   width: 500px;
