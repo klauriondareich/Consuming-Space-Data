@@ -42,3 +42,37 @@
     transform: rotate(360deg);
   }
 }
+
+.main-container{
+  width: 80%;
+  margin: auto;
+}
+.content-element{
+  background-color: #f5f7f8;
+  border-radius: 7px;
+  box-shadow: rgb(31 31 31 / 50%) 0px 1px 6px 0px;
+  padding: 10px;
+  display: inline-block;
+  margin-right: 20px;
+}
+.width-500{
+  width: 500px;
+}
+.width-400{
+  width: 400px;
+}
+.rocket-big-img{
+  float: left;
+}
+.first p{
+  padding-left: 100px;
+}
+/* a.btn-style{
+  background-color: #d49191;
+  padding: 6px;
+  border-radius: 4px;
+  font-size: 15px;
+  border: 0;
+  color: #fff;
+  text-decoration: none;
+} */

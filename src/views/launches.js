@@ -1,6 +1,25 @@
 
 const Launches = () => {
-    return <h1>launches page</h1>;
+    return <div className="main-container">
+        <h2>Prochain le lancement</h2>
+        <div className="content-element width-500 first">
+            <img src="assets/img/rocket-big.png" className="rocket-big-img" alt="rocket big"/>
+            <p>Date du lancement : </p>
+            <p>Lanceur : </p>
+        </div>
+
+        <h2>Lancements passés</h2>
+        <div className="content-element width-400">
+            <img src="assets/img/rocket.png" alt="rocket"/>
+            <p>Date du lancement : </p>
+            <p><a href="/">Lanceur : </a></p>
+        </div>
+        <div className="content-element width-400">
+            <img src="assets/img/rocket.png" alt="rocket"/>
+            <p>Date du lancement : </p>
+            <p><a href="/">Lanceur : </a></p>
+        </div>
+    </div>;
   };
   
   export default Launches;
