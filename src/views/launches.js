@@ -6,10 +6,10 @@ import axios from "axios";
 export default class Launches extends  React.Component {
 
     state = {
-        launchItem: {
-           
-        }
+        launchItem: {},
+        past_launch_items: []
     }
+
 
     componentDidMount() {
 
@@ -17,7 +17,7 @@ export default class Launches extends  React.Component {
           .then(res => {
            // const launchItem = res.data;
            // this.setState({ launchItem });
-           const launchItem = {  
+                const launchItem = {  
                     "mission_name": "",
                     "mission_info": "",
                     "mission_id": "",
@@ -28,7 +28,13 @@ export default class Launches extends  React.Component {
                 launchItem.mission_id = res.data.mission_id[0];
                 launchItem.rocket_name = res.data.rocket.rocket_name;
                 this.setState({ launchItem });
-                console.log(this.state)
+          });
+
+
+          axios.get(`https://api.spacex.land/rest/launches-past`)
+          .then(res => {
+                const past_launch_items = res.data;
+                this.setState({ past_launch_items });
           })
 
       }
@@ -36,33 +42,28 @@ export default class Launches extends  React.Component {
         return(
 
         <div className="main-container">
-            <h2>Prochain le lancement</h2>
+            <h2>Prochain lancement</h2>
                 <div className="content-element width-850 first">
                     <img src="assets/img/rocket-big.png" className="rocket-big-img" alt="rocket big"/>
-                    <p><span class="bold"> Code de la mission : </span>   {this.state.launchItem.mission_id}</p>
-                    <p><span class="bold"> Nom de la mission : </span> {this.state.launchItem.mission_name}</p>
-                    <p><span class="bold"> Information de la mission :  </span> {this.state.launchItem.mission_info}</p>
-                    <p><span class="bold"> Lanceur :  </span> {this.state.launchItem.rocket_name}</p>
+                    <p><span className="bold"> Code de la mission : </span>   {this.state.launchItem.mission_id}</p>
+                    <p><span className="bold"> Nom de la mission : </span> {this.state.launchItem.mission_name}</p>
+                    <p><span className="bold"> Information de la mission :  </span> {this.state.launchItem.mission_info}</p>
+                    <p><span className="bold"> Lanceur :  </span> {this.state.launchItem.rocket_name}</p>
                     
                 </div>
 
     
             <h2>Lancements passés</h2>
-            <div className="content-element width-400">
-                <img src="assets/img/rocket.png" alt="rocket"/>
-                <p>Date du lancement : </p>
-                <p><a href="/">Lanceur : </a></p>
-            </div>
-            <div className="content-element width-400">
-                <img src="assets/img/rocket.png" alt="rocket"/>
-                <p>Date du lancement : </p>
-                <p><a href="/">Lanceur : </a></p>
-            </div>
-            <div className="content-element width-400">
-                <img src="assets/img/rocket.png" alt="rocket"/>
-                <p>Date du lancement : </p>
-                <p><a href="/">Lanceur : </a></p>
-            </div>
+
+            { this.state.past_launch_items.slice(0, 4).map(item => 
+                <div className="content-element width-400" key={item.id}>
+                    <img src="assets/img/rocket.png" alt="rocket"/>
+                    <p>Nom de la mission : {item.mission_name}</p>
+                    <p>Année de lancement : {item.launch_year}</p>
+                    <p><a href={'/launches/' + item.id}>Voir plus de détails </a></p>
+                </div>
+            )}
+            
         </div>
         )
     }
