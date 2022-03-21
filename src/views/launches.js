@@ -31,7 +31,7 @@ export default class Launches extends  React.Component {
           });
 
 
-          axios.get(`https://api.spacex.land/rest/launches-past`)
+          axios.get(`https://api.spacex.land/rest/launches-past?limit=4`)
           .then(res => {
                 const past_launch_items = res.data;
                 this.setState({ past_launch_items });
