@@ -64,6 +64,7 @@ export  class ViewLaunch extends  React.Component{
     render(){
 
         let mission_status = "";
+        let isvisible = "hide";
         
 
         // Vérifie le status du lancement
@@ -75,13 +76,17 @@ export  class ViewLaunch extends  React.Component{
             mission_status = <span className="failed"> Echoué </span>   
         }
 
-         // Loop les missions liées à un first_stage
-        //  let missions = this.state.launchObj.missions;
+        function changeVisibility(){
 
-        //  missions.forEach(item => {
-        //     console.log("tt", item)
-        //      // return <p> Flight : {item.flight}  Nom de la mission : {item.name}</p>    
-        //  });
+            if (isvisible === "hide"){
+                isvisible = "show";
+            }
+            else isvisible = "hide"
+     
+        
+            console.log("clicked", isvisible)
+            
+        };
 
         return(
            <div className="view-launch-container">
@@ -105,7 +110,7 @@ export  class ViewLaunch extends  React.Component{
                             <p> landing vehicle : {this.state.launchObj.landing_vehicle}</p>    
                             <p> Flight : {this.state.launchObj.flight}</p>    
                         </div>
-           
+                        <button onClick={changeVisibility}>Afficher les missions associés</button>    
                         <div className="bloc-style">
                             <h2> Missions associés au first_stage : </h2>
                             {this.state.launchItem.map((data, index) =>
