@@ -7,6 +7,7 @@ export  class ViewLaunch extends  React.Component{
 
     state = {
         launchObj: {},
+        launchItem: []
     }
     
     componentDidMount() {
@@ -17,8 +18,6 @@ export  class ViewLaunch extends  React.Component{
         axios.get(fullPath)
         .then(res => {
             
-            console.log(res.data);
-
               const launchObj = {  
                   "mission_name": "",
                   "mission_info": "",
@@ -46,14 +45,29 @@ export  class ViewLaunch extends  React.Component{
               launchObj.flight = res.data.rocket.first_stage.cores[0].flight;
               launchObj.missions = res.data.rocket.first_stage.cores[0].core.missions;
 
-              console.log("launchObj",launchObj )
+              
+             // Loop les missions liées à un first_stage
+             let launchItem = res.data.rocket.first_stage.cores[0].core.missions;
+
+            //  missions.forEach(launchItem => {
+               
+            //     this.setState({ launchItem });
+            //      // return <p> Flight : {item.flight}  Nom de la mission : {item.name}</p>    
+            //  });
+            console.log("launchItem", launchItem);
               this.setState({ launchObj });
+              this.setState({ launchItem });
+
         });
     }
 
     render(){
 
         let mission_status = "";
+        
+
+        // Vérifie le status du lancement
+
         if (this.state.launchObj.launch_success){
             mission_status = <span className="success"> Réussi </span>    
         }
@@ -61,25 +75,44 @@ export  class ViewLaunch extends  React.Component{
             mission_status = <span className="failed"> Echoué </span>   
         }
 
+         // Loop les missions liées à un first_stage
+        //  let missions = this.state.launchObj.missions;
+
+        //  missions.forEach(item => {
+        //     console.log("tt", item)
+        //      // return <p> Flight : {item.flight}  Nom de la mission : {item.name}</p>    
+        //  });
+
         return(
            <div className="view-launch-container">
             
                  <div className="view-launch-content">
-                     <img src="/assets/img/launch.jpg" width="400" alt="rocket"/>
+                     <img src="/assets/img/nasa.jpg" alt="rocket"/>
                      <div>
-                        <h2>Mission : {this.state.launchObj.mission_name}</h2>
-                        <p>ID : {this.state.launchObj.mission_id}</p>
-                        <p>Info : {this.state.launchObj.mission_info}</p>
-                        <p>Lanceur : {this.state.launchObj.rocket_name}</p>
-                        <p> Code du site : {this.state.launchObj.site_id}</p>
-                        <p> Nom du site : {this.state.launchObj.site_name}</p>    
-                        <p> Nom complet du site : {this.state.launchObj.site_name_long}</p>    
-                        <h2> Information sur le first_stage : </h2>  
-                        <p> Status de la mission : {mission_status}</p>
-                        <p> landing type : {this.state.launchObj.landing_type}</p>    
-                        <p> landing vehicle : {this.state.launchObj.landing_vehicle}</p>    
-                        <p> Flight : {this.state.launchObj.flight}</p>    
-                        
+                        <div className="bloc-style">
+                            <h2>Mission : {this.state.launchObj.mission_name}</h2>
+                            <p>ID : {this.state.launchObj.mission_id}</p>
+                            <p>Info : {this.state.launchObj.mission_info}</p>
+                            <p>Lanceur : {this.state.launchObj.rocket_name}</p>
+                            <p> Code du site : {this.state.launchObj.site_id}</p>
+                            <p> Nom du site : {this.state.launchObj.site_name}</p>    
+                            <p> Nom complet du site : {this.state.launchObj.site_name_long}</p> 
+                        </div>
+                        <div className="bloc-style">
+                            <h2> Information sur le first_stage : </h2>  
+                            <p> Status de la mission : {mission_status}</p>
+                            <p> landing type : {this.state.launchObj.landing_type}</p>    
+                            <p> landing vehicle : {this.state.launchObj.landing_vehicle}</p>    
+                            <p> Flight : {this.state.launchObj.flight}</p>    
+                        </div>
+           
+                        <div className="bloc-style">
+                            <h2> Missions associés au first_stage : </h2>
+                            {this.state.launchItem.map((data, index) =>
+                                <p key={index}> Flight : {data.flight} --- Mission : {data.name}</p>
+                            )} 
+                        </div>
+                      
                      </div>
                  </div>
                 

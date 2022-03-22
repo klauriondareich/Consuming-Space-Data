@@ -47,6 +47,7 @@
   width: 60%;
   margin: auto;
   padding-bottom: 100px;
+  color: #333;
 }
 .content-element{
   background-color: #f5f7f8;
@@ -74,12 +75,12 @@
 }
 .view-launch-container{
   border: 1px solid #eae6e6;
-  padding: 20px;
+  padding-top: 20px;
+  padding-left: 20px;
   margin: 20px auto;
   width: 80%;
 }
 .view-launch-content img{
-  float: left;
   margin-right: 20px;
 }
 .success{
@@ -95,4 +96,13 @@
   background-color: red;
   padding: 2px 8px;
   color: #fff;
+}
+
+.bloc-style{
+  box-shadow: 0 10px 16px 0 #ddd, 0 6px 20px 0 #e9e9e9;
+  background-color: #fff;
+  border-radius: 4px;
+  margin: 20px 0px;
+  padding: 10px;
+  width: 96%;
 }
