@@ -2,6 +2,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./views/home";
 import Launches from "./views/launches";
+import ViewLaunch from "./views/viewLaunch";
 
 function App() {
   return (  
@@ -10,6 +11,7 @@ function App() {
       <Routes>
           <Route index element={<Home />} />
           <Route path="launches" element={<Launches />} />
+          <Route path="launches/:id" element={<ViewLaunch />} />
       </Routes>
     </BrowserRouter>
    
