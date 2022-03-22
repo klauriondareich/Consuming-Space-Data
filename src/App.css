@@ -72,12 +72,27 @@
 .bold{
   font-weight: bold;
 }
-/* a.btn-style{
-  background-color: #d49191;
-  padding: 6px;
-  border-radius: 4px;
-  font-size: 15px;
-  border: 0;
+.view-launch-container{
+  border: 1px solid #eae6e6;
+  padding: 20px;
+  margin: 20px auto;
+  width: 80%;
+}
+.view-launch-content img{
+  float: left;
+  margin-right: 20px;
+}
+.success{
+  border: 1px solid;
+  border-radius: 10px;
+  background-color: #31b835;
+  padding: 2px 8px;
   color: #fff;
-  text-decoration: none;
-} */
+}
+.failed{
+  border: 1px solid;
+  border-radius: 10px;
+  background-color: red;
+  padding: 2px 8px;
+  color: #fff;
+}
