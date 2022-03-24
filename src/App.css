@@ -45,19 +45,22 @@
 
 .main-container{
   /* width: 60%; */
-  margin: auto;
+  /* margin: auto; */
   padding-bottom: 100px;
   color: #333;
   background-color: #f6f6f6;
+  padding-top: 20px;
+  padding-left: 200px;
 }
 .content-element{
-  background-color: #f5f7f8;
+  background-color: #fff;
   border-radius: 7px;
-  box-shadow: rgb(31 31 31 / 50%) 0px 1px 6px 0px;
+  /* box-shadow: rgb(31 31 31 / 50%) 0px 1px 6px 0px; */
   padding: 10px;
   display: inline-block;
   margin-right: 20px;
   margin-bottom: 30px;
+  border: 1px solid #ddd;
 }
 
 .width-850{
