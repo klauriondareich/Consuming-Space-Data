@@ -5,13 +5,13 @@ const Navbar = () => {
     return  <nav>
                 <ul>
                     <li>
-                    <Link to="/">Home</Link>
+                    <Link to="/">Welcome in Space World</Link>
                     </li>
                     <li>
-                    <Link to="/about">About Us</Link>
+                    <Link to="/launches">Accueil</Link>
                     </li>
                     <li>
-                    <Link to="/contact">Contact Us</Link>
+                    <Link to="/all">Tous les lancements</Link>
                     </li>
                 </ul>
              </nav>

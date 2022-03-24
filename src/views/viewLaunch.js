@@ -86,8 +86,9 @@ export  class ViewLaunch extends  React.Component{
 
 
         return(
-           <div className="view-launch-container">
-            
+           <div className="view-launch-main-container">
+             
+             <div className="view-launch-container">
                  <div className="view-launch-content">
                      <img src="/assets/img/nasa.jpg" alt="rocket"/>
                      <div>
@@ -118,7 +119,8 @@ export  class ViewLaunch extends  React.Component{
                       
                      </div>
                  </div>
-                
+             </div>
+   
             </div>
         )
     }

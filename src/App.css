@@ -44,8 +44,6 @@
 }
 
 .main-container{
-  /* width: 60%; */
-  /* margin: auto; */
   padding-bottom: 100px;
   color: #333;
   background-color: #f6f6f6;
@@ -55,7 +53,6 @@
 .content-element{
   background-color: #fff;
   border-radius: 7px;
-  /* box-shadow: rgb(31 31 31 / 50%) 0px 1px 6px 0px; */
   padding: 10px;
   display: inline-block;
   margin-right: 20px;
@@ -84,11 +81,16 @@
 }
 
 .view-launch-container{
-  border: 1px solid #eae6e6;
+  border-left: 1px solid #eae6e6;
   padding-top: 20px;
   padding-left: 20px;
   margin: 20px auto;
   width: 80%;
+}
+
+.view-launch-main-container{
+  padding-top: 10px;
+  background-color: #f6f6f6;
 }
 
 .view-launch-content img{
@@ -112,7 +114,6 @@
 }
 
 .bloc-style{
-  box-shadow: 0 10px 16px 0 #ddd, 0 6px 20px 0 #e9e9e9;
   background-color: #fff;
   border-radius: 4px;
   margin: 20px 0px;
@@ -136,7 +137,7 @@ button{
 nav ul{
   padding: 0;
   margin: auto;
-  width: 400px;
+  width: 700px;
 }
 
 nav ul li{
