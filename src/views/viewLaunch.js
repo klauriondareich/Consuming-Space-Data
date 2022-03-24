@@ -7,8 +7,10 @@ export  class ViewLaunch extends  React.Component{
 
     state = {
         launchObj: {},
-        launchItem: []
+        launchItem: [],
+        isVisible: false
     }
+   
     
     componentDidMount() {
 
@@ -49,14 +51,8 @@ export  class ViewLaunch extends  React.Component{
              // Loop les missions liées à un first_stage
              let launchItem = res.data.rocket.first_stage.cores[0].core.missions;
 
-            //  missions.forEach(launchItem => {
-               
-            //     this.setState({ launchItem });
-            //      // return <p> Flight : {item.flight}  Nom de la mission : {item.name}</p>    
-            //  });
-            console.log("launchItem", launchItem);
-              this.setState({ launchObj });
-              this.setState({ launchItem });
+            this.setState({ launchObj });
+            this.setState({ launchItem });
 
         });
     }
@@ -64,10 +60,9 @@ export  class ViewLaunch extends  React.Component{
     render(){
 
         let mission_status = "";
-        let isvisible = "hide";
+        let buttonVar = "";
         
-
-        // Vérifie le status du lancement
+        // Affiche le status de la mission
 
         if (this.state.launchObj.launch_success){
             mission_status = <span className="success"> Réussi </span>    
@@ -76,17 +71,19 @@ export  class ViewLaunch extends  React.Component{
             mission_status = <span className="failed"> Echoué </span>   
         }
 
-        function changeVisibility(){
-
-            if (isvisible === "hide"){
-                isvisible = "show";
-            }
-            else isvisible = "hide"
-     
-        
-            console.log("clicked", isvisible)
-            
+        // Affiche ou masque les missions associées au first_stage
+        const showLaunches = () =>{
+            this.setState({ isVisible: true });  
         };
+
+        const hideLaunches = () =>{
+            this.setState({ isVisible: false });  
+        };
+
+        // switching entre le button afficher et masquer
+        if (this.state.isVisible) buttonVar = <button className="bloc-style" onClick={hideLaunches}>Masquer les missions</button>   
+        else buttonVar = <button className="bloc-style" onClick={showLaunches}>Afficher les missions associés au first_stage</button>
+
 
         return(
            <div className="view-launch-container">
@@ -102,17 +99,18 @@ export  class ViewLaunch extends  React.Component{
                             <p> Code du site : {this.state.launchObj.site_id}</p>
                             <p> Nom du site : {this.state.launchObj.site_name}</p>    
                             <p> Nom complet du site : {this.state.launchObj.site_name_long}</p> 
+                            <p> Status de la mission : {mission_status}</p>
                         </div>
                         <div className="bloc-style">
                             <h2> Information sur le first_stage : </h2>  
-                            <p> Status de la mission : {mission_status}</p>
                             <p> landing type : {this.state.launchObj.landing_type}</p>    
                             <p> landing vehicle : {this.state.launchObj.landing_vehicle}</p>    
                             <p> Flight : {this.state.launchObj.flight}</p>    
                         </div>
-                        <button onClick={changeVisibility}>Afficher les missions associés</button>    
-                        <div className="bloc-style">
-                            <h2> Missions associés au first_stage : </h2>
+
+                        {buttonVar}
+
+                        <div className={this.state.isVisible ? 'show bloc-style' : 'hide'}>
                             {this.state.launchItem.map((data, index) =>
                                 <p key={index}> Flight : {data.flight} --- Mission : {data.name}</p>
                             )} 
