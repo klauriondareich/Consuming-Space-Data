@@ -107,8 +107,12 @@
   width: 96%;
 }
 .hide{
-  visibility: visible;
+  display: none;
 }
 .show{
-  visibility: hidden;
+  display: block;
+}
+button{
+  font-size: 18px;
+  cursor: pointer;
 }
