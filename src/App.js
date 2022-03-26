@@ -1,7 +1,7 @@
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./views/home";
-import Launches from "./views/launches";
+import Home from "./views/welcome";
+import Launches from "./views/home";
 import ViewLaunch from "./views/viewLaunch";
 import AllLaunches from "./views/allLaunches";
 import Navbar from "./views/navbar"

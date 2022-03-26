@@ -11,7 +11,7 @@ const Navbar = () => {
                         <Link to="/launches">Accueil</Link>
                     </li>
                     <li>
-                        <Link to="/all">Tous les lancements</Link>
+                        <Link to="/all_launches">Tous les lancements</Link>
                     </li>
                 </ul>
              </nav>
