@@ -1,6 +1,6 @@
 import React from "react";
-import axios from "axios";
 import Loader from "react-js-loader";
+import {getNextLaunch, getPastLaunches} from "../services/apiService"
 
 
 export default class Launches extends  React.Component {
@@ -10,15 +10,13 @@ export default class Launches extends  React.Component {
         past_launch_arr: [],
         isLoading: true
     };
-    base_path = "https://api.spacex.land/"
 
 
 
     componentDidMount() {
 
-        let fullPath_1 = this.base_path + "rest/launch-next";
-        axios.get(fullPath_1)
-          .then(res => {
+        
+        getNextLaunch().then(res => {
                 const launchObj = {  
                     "mission_name": "",
                     "mission_info": "",
@@ -33,9 +31,8 @@ export default class Launches extends  React.Component {
           });
 
 
-          let fullPath_2 = this.base_path + "rest/launches-past?limit=4";
-          axios.get(fullPath_2)
-          .then(res => {
+          
+          getPastLaunches().then(res => {
                 const past_launch_arr = res.data;
                 this.setState({ past_launch_arr });
                 this.setState({isLoading: false})
