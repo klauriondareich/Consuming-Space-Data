@@ -1,12 +1,13 @@
 import React from "react";
 import axios from "axios";
-// import getNextLaunches from "../services/launchesService";
+import Loader from "react-js-loader";
 
 
 export default class AllLaunches extends  React.Component {
 
     state = {
-        all_launches: []
+        all_launches: [],
+        isLoading: true
     }
 
 
@@ -17,6 +18,7 @@ export default class AllLaunches extends  React.Component {
           .then(res => {
                 const all_launches = res.data;
                 this.setState({ all_launches });
+                this.setState({isLoading: false})
           })
 
       }
@@ -26,6 +28,10 @@ export default class AllLaunches extends  React.Component {
         <div className="main-container">
     
             <h2>Tous les lancements</h2>
+
+            <div className={this.state.isLoading ? 'show marg-left-500' : 'hide'}>
+                <Loader type="spinner-default" bgColor={"#0064c2"} color={'#fff'} size={40} />           
+            </div>
 
             { this.state.all_launches.slice(0, 4).map(item => 
                 <div className="content-element width-400" key={item.id}>
