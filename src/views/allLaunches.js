@@ -1,6 +1,6 @@
 import React from "react";
-import axios from "axios";
 import Loader from "react-js-loader";
+import {getAllLaunches} from "../services/apiService"
 
 
 export default class AllLaunches extends  React.Component {
@@ -14,8 +14,7 @@ export default class AllLaunches extends  React.Component {
     componentDidMount() {
 
             // Get all launches
-          axios.get(`https://api.spacex.land/rest/launches`)
-          .then(res => {
+            getAllLaunches().then(res => {
                 const all_launches = res.data;
                 this.setState({ all_launches });
                 this.setState({isLoading: false})
