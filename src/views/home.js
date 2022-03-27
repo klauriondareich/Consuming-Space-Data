@@ -2,8 +2,6 @@ import React from "react";
 import axios from "axios";
 import Loader from "react-js-loader";
 
-// import getNextLaunches from "../services/launchesService";
-
 
 export default class Launches extends  React.Component {
 
