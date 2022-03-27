@@ -1,6 +1,6 @@
 import React from "react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
+import {getALaunch} from "../services/apiService"
 
 
 export  class ViewLaunch extends  React.Component{
@@ -15,10 +15,8 @@ export  class ViewLaunch extends  React.Component{
     componentDidMount() {
 
         const id = this.props.params.id;
-        let fullPath = "https://api.spacex.land/rest/launch/" + id;
 
-        axios.get(fullPath)
-        .then(res => {
+        getALaunch(id).then(res => {
             
               const launchObj = {  
                   "mission_name": "",

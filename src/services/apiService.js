@@ -22,6 +22,13 @@ export function getAllLaunches(){
     return axios.get(fullPath_3)
 }
 
+// Getting a launch
+export function getALaunch(id){
+    let fullPath = base_path + "rest/launch/" + id;
+    return axios.get(fullPath)
+}
+
+
 
  
 
