@@ -68,6 +68,10 @@
   width: 400px;
 }
 
+.width-300{
+  width: 300px;
+}
+
 .rocket-big-img{
   float: left;
 }

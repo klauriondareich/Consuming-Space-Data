@@ -36,7 +36,7 @@ export default class AllLaunches extends  React.Component {
             </div>
 
             { this.state.all_launches.map(item => 
-                <div className="content-element width-400" key={item.id}>
+                <div className="content-element width-300" key={item.id}>
                     <img src="assets/img/rocket.png" alt="rocket"/>
                     <p>Nom de la mission : {item.mission_name}</p>
                     <p>Année de lancement : {item.launch_year}</p>
