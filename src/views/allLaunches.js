@@ -16,8 +16,11 @@ export default class AllLaunches extends  React.Component {
             // Get all launches
             getAllLaunches().then(res => {
                 const all_launches = res.data;
+                console.log(res.data);
                 this.setState({ all_launches });
-                this.setState({isLoading: false})
+                this.setState({isLoading: false});
+                console.log(all_launches);
+
           })
 
       }
@@ -32,7 +35,7 @@ export default class AllLaunches extends  React.Component {
                 <Loader type="spinner-default" bgColor={"#0064c2"} color={'#fff'} size={40} />           
             </div>
 
-            { this.state.all_launches.slice(0, 4).map(item => 
+            { this.state.all_launches.map(item => 
                 <div className="content-element width-400" key={item.id}>
                     <img src="assets/img/rocket.png" alt="rocket"/>
                     <p>Nom de la mission : {item.mission_name}</p>

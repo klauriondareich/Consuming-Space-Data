@@ -61,7 +61,7 @@ export default class Launches extends  React.Component {
             <div className={this.state.isLoading ? 'show marg-left-500' : 'hide'}>
                 <Loader type="spinner-default" bgColor={"#0064c2"} color={'#fff'} size={40} />           
             </div>
-            { this.state.past_launch_arr.slice(0, 4).map(item => 
+            { this.state.past_launch_arr.map(item => 
                 <div className="content-element width-400" key={item.id}>
                     <img src="assets/img/rocket.png" alt="rocket"/>
                     <p>Nom de la mission : {item.mission_name}</p>
