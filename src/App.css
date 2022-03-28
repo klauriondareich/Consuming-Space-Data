@@ -178,3 +178,12 @@ nav ul li a:hover{
     border-bottom: 2px solid #725050;
   }
   .marg-left-500{margin-left: -500px;}
+
+  .input-search{
+    padding: 10px;
+    background: #f6f6f6;
+    width: 60%;
+    display: block;
+    margin-bottom: 50px;
+    border: 1px solid #111;
+  }
