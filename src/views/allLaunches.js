@@ -10,7 +10,8 @@ export default class AllLaunches extends  React.Component {
         isLoading: true,
         searchItem: "",
         filteredItem: "",
-        type: "search"
+        type: "search",
+        count: 9,
     }
 
     componentDidMount() {
@@ -18,7 +19,7 @@ export default class AllLaunches extends  React.Component {
             // Get all launches
             getAllLaunches().then(res => {
                 const all_launches = res.data;
-               console.log(res.data);
+              // console.log(res.data);
                 this.setState({ all_launches });
                 this.setState({isLoading: false});
           })
@@ -35,7 +36,7 @@ export default class AllLaunches extends  React.Component {
                 this.setState({searchItem: event.target.value});
             }}/> 
 
-            <label for="months">Filtrer par mois :</label>
+            <label htmlFor="months">Filtrer par mois :</label>
             <select name="months" id="months" onChange={(event) =>{
                 this.setState({type: "filter"});
                 this.setState({filteredItem: event.target.value});
@@ -77,7 +78,7 @@ export default class AllLaunches extends  React.Component {
                     }
                 }
             })
-            .map((item, index) => 
+            .slice(0, this.state.count).map((item, index) => 
                 <div className="content-element width-300" key={index}>
                     <img src="assets/img/rocket.png" alt="rocket"/>
                     <p>Nom de la mission : {item.mission_name}</p>
@@ -85,6 +86,18 @@ export default class AllLaunches extends  React.Component {
                     <p><a href={'/launches/' + item.id}>Voir plus de détails </a></p>
                 </div>
             )}
+            <br/>
+            <button className="mg-left" onClick={(event) =>{
+                let count = this.state.count;
+                count = count + 9;
+                this.setState({count});
+            }}>Afficher Plus</button>
+
+            <button onClick={(event) =>{
+                let count = this.state.count;
+                count = count - 9;
+                this.setState({count});
+            }}>Afficher Moins</button>
             
         </div>
         )
