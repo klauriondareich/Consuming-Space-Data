@@ -4,7 +4,7 @@ let base_path = "https://api.spacex.land/";
 
 let fullPath_1 = base_path + "rest/launch-next";
 let fullPath_2 = base_path + "rest/launches-past?limit=4";
-let fullPath_3 = base_path + "rest/launches";
+let fullPath_3 = base_path + "rest/launches?limit=27";
 
         
 // Getting next launch data
