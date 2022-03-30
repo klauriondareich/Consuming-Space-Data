@@ -18,7 +18,7 @@ export default class AllLaunches extends  React.Component {
 
             // Get all launches
             getAllLaunches(this.state.page).then(res => {
-               
+               console.log(res.data);
                 this.setState((previous) => ({
                     all_launches: [...previous.all_launches, ...res.data]
                 }));
@@ -51,7 +51,7 @@ export default class AllLaunches extends  React.Component {
                 this.setState({searchItem: event.target.value});
             }}/> 
 
-            <label htmlFor="months">Filtrer par mois :</label>
+            <label htmlFor="months">Filtrer par année :</label>
             <select name="months" id="months" onChange={(event) =>{
                 this.setState({type: "filter"});
                 this.setState({filteredItem: event.target.value});
@@ -93,13 +93,14 @@ export default class AllLaunches extends  React.Component {
             .map((item, index) => 
                 <div className="content-element width-300" key={index}>
                     <img src="assets/img/rocket.png" alt="rocket"/>
-                    <p>Nom de la mission : {item.mission_name}</p>
+                    <p>Mission : {item.mission_name}</p>
+                    <p>Date : {new Date(item.launch_date_utc).toLocaleDateString("en-US")}</p>
                     <p>Année de lancement : {item.launch_year}</p>
                     <p><a href={'/launches/' + item.id}>Voir plus de détails </a></p>
                 </div>
             )}
             <br/>
-            
+
             <div className={this.state.isLoading ? 'show marg-left-500' : 'hide'}>
                 <Loader type="spinner-default" bgColor={"#0064c2"} color={'#fff'} size={40} />           
             </div>
