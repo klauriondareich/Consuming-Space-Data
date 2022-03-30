@@ -18,7 +18,7 @@ export default class AllLaunches extends  React.Component {
 
             // Get all launches
             getAllLaunches(this.state.page).then(res => {
-               console.log(res.data);
+               //console.log(res.data);
                 this.setState((previous) => ({
                     all_launches: [...previous.all_launches, ...res.data]
                 }));
@@ -38,6 +38,7 @@ export default class AllLaunches extends  React.Component {
 			page: previous.page + 1
 		}));
 	};
+    
 
     render(){
         return(
@@ -51,8 +52,8 @@ export default class AllLaunches extends  React.Component {
                 this.setState({searchItem: event.target.value});
             }}/> 
 
-            <label htmlFor="months">Filtrer par année :</label>
-            <select name="months" id="months" onChange={(event) =>{
+            <label htmlFor="years">Filtrer par année :</label>
+            <select name="years" id="years" onChange={(event) =>{
                 this.setState({type: "filter"});
                 this.setState({filteredItem: event.target.value});
             }}>
@@ -61,6 +62,7 @@ export default class AllLaunches extends  React.Component {
                 <option value="2018">2018</option>
                 <option value="2017">2017</option>
                 <option value="2014">2014</option>
+                <option value="2014">2015</option>
                 <option value="2012">2012</option>
                 <option value="2013">2013</option>
                 <option value="2010">2010</option>
@@ -94,7 +96,7 @@ export default class AllLaunches extends  React.Component {
                 <div className="content-element width-300" key={index}>
                     <img src="assets/img/rocket.png" alt="rocket"/>
                     <p>Mission : {item.mission_name}</p>
-                    <p>Date : {new Date(item.launch_date_utc).toLocaleDateString("en-US")}</p>
+                    <p>Date : {new Date(item.launch_date_utc).toLocaleDateString("fr-FR")}</p>
                     <p>Année de lancement : {item.launch_year}</p>
                     <p><a href={'/launches/' + item.id}>Voir plus de détails </a></p>
                 </div>

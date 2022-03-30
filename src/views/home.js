@@ -61,6 +61,7 @@ export default class Launches extends  React.Component {
                     <img src="assets/img/rocket.png" alt="rocket"/>
                     <p>Nom de la mission : {item.mission_name}</p>
                     <p>Année de lancement : {item.launch_year}</p>
+                    <p>Date : {new Date(item.launch_date_utc).toLocaleDateString("fr-FR")}</p>
                     <p><a href={'/launches/' + item.id}>Voir plus de détails </a></p>
                 </div>
             )}
