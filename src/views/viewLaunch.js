@@ -1,12 +1,14 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import {getALaunch} from "../services/apiService"
+import {viewLaunchObj} from "../models/models"
+
 
 
 export  class ViewLaunch extends  React.Component{
 
     state = {
-        launchObj: {},
+        viewLaunchObj: {},
         launchItem: [],
         isVisible: false
     }
@@ -18,38 +20,24 @@ export  class ViewLaunch extends  React.Component{
 
         getALaunch(id).then(res => {
             
-              const launchObj = {  
-                  "mission_name": "",
-                  "mission_info": "",
-                  "mission_id": "",
-                  "rocket_name": "",
-                  "site_id": "",
-                  "site_name": "",
-                  "site_name_long": "",
-                  "launch_success": false,
-                  "landing_type": "",
-                  "landing_vehicle": "",
-                  "flight": 0,
-                  "missions": [],
-              }
-              launchObj.mission_name = res.data.mission_name;
-              launchObj.mission_info = res.data.details;
-              launchObj.mission_id = res.data.mission_id[0];
-              launchObj.rocket_name = res.data.rocket.rocket_name;
-              launchObj.site_id = res.data.launch_site.site_id;
-              launchObj.site_name = res.data.launch_site.site_name;
-              launchObj.site_name_long = res.data.launch_site.site_name_long;
-              launchObj.launch_success = res.data.launch_success;
-              launchObj.landing_type = res.data.rocket.first_stage.cores[0].landing_type;
-              launchObj.landing_vehicle = res.data.rocket.first_stage.cores[0].landing_vehicle;
-              launchObj.flight = res.data.rocket.first_stage.cores[0].flight;
-              launchObj.missions = res.data.rocket.first_stage.cores[0].core.missions;
+              viewLaunchObj.mission_name = res.data.mission_name;
+              viewLaunchObj.mission_info = res.data.details;
+              viewLaunchObj.mission_id = res.data.mission_id[0];
+              viewLaunchObj.rocket_name = res.data.rocket.rocket_name;
+              viewLaunchObj.site_id = res.data.launch_site.site_id;
+              viewLaunchObj.site_name = res.data.launch_site.site_name;
+              viewLaunchObj.site_name_long = res.data.launch_site.site_name_long;
+              viewLaunchObj.launch_success = res.data.launch_success;
+              viewLaunchObj.landing_type = res.data.rocket.first_stage.cores[0].landing_type;
+              viewLaunchObj.landing_vehicle = res.data.rocket.first_stage.cores[0].landing_vehicle;
+              viewLaunchObj.flight = res.data.rocket.first_stage.cores[0].flight;
+              viewLaunchObj.missions = res.data.rocket.first_stage.cores[0].core.missions;
 
               
              // Loop les missions liées à un first_stage
              let launchItem = res.data.rocket.first_stage.cores[0].core.missions;
 
-            this.setState({ launchObj });
+            this.setState({ viewLaunchObj });
             this.setState({ launchItem });
 
         });
@@ -60,16 +48,16 @@ export  class ViewLaunch extends  React.Component{
         let mission_status = "";
         let buttonVar = "";
         
-        // Affiche le status de la mission
+        // Display the status of the mission
 
-        if (this.state.launchObj.launch_success){
+        if (this.state.viewLaunchObj.launch_success){
             mission_status = <span className="success"> Réussi </span>    
         }
         else{
             mission_status = <span className="failed"> Echoué </span>   
         }
 
-        // Affiche ou masque les missions associées au first_stage
+        // display and hide missions related to a first stage
         const showLaunches = () =>{
             this.setState({ isVisible: true });  
         };
@@ -78,7 +66,7 @@ export  class ViewLaunch extends  React.Component{
             this.setState({ isVisible: false });  
         };
 
-        // switching entre le button afficher et masquer
+        // switching hide and dislay buttons
         if (this.state.isVisible) buttonVar = <button className="bloc-style" onClick={hideLaunches}>Masquer les missions</button>   
         else buttonVar = <button className="bloc-style" onClick={showLaunches}>Afficher les missions associés au first_stage</button>
 
@@ -91,20 +79,20 @@ export  class ViewLaunch extends  React.Component{
                      <img src="/assets/img/nasa.jpg" alt="rocket"/>
                      <div>
                         <div className="bloc-style">
-                            <h2>Mission : {this.state.launchObj.mission_name}</h2>
-                            <p>ID : {this.state.launchObj.mission_id}</p>
-                            <p>Info : {this.state.launchObj.mission_info}</p>
-                            <p>Lanceur : {this.state.launchObj.rocket_name}</p>
-                            <p> Code du site : {this.state.launchObj.site_id}</p>
-                            <p> Nom du site : {this.state.launchObj.site_name}</p>    
-                            <p> Nom complet du site : {this.state.launchObj.site_name_long}</p> 
+                            <h2>Mission : {this.state.viewLaunchObj.mission_name}</h2>
+                            <p>ID : {this.state.viewLaunchObj.mission_id}</p>
+                            <p>Info : {this.state.viewLaunchObj.mission_info}</p>
+                            <p>Lanceur : {this.state.viewLaunchObj.rocket_name}</p>
+                            <p> Code du site : {this.state.viewLaunchObj.site_id}</p>
+                            <p> Nom du site : {this.state.viewLaunchObj.site_name}</p>    
+                            <p> Nom complet du site : {this.state.viewLaunchObj.site_name_long}</p> 
                             <p> Status de la mission : {mission_status}</p>
                         </div>
                         <div className="bloc-style">
                             <h2> Information sur le first_stage : </h2>  
-                            <p> landing type : {this.state.launchObj.landing_type}</p>    
-                            <p> landing vehicle : {this.state.launchObj.landing_vehicle}</p>    
-                            <p> Flight : {this.state.launchObj.flight}</p>    
+                            <p> landing type : {this.state.viewLaunchObj.landing_type}</p>    
+                            <p> landing vehicle : {this.state.viewLaunchObj.landing_vehicle}</p>    
+                            <p> Flight : {this.state.viewLaunchObj.flight}</p>    
                         </div>
 
                         {buttonVar}

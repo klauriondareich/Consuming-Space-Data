@@ -1,12 +1,13 @@
 import React from "react";
 import Loader from "react-js-loader";
 import {getNextLaunch, getPastLaunches} from "../services/apiService"
+import {nextLaunchObj} from "../models/models"
 
 
 export default class Launches extends  React.Component {
 
     state = {
-        launchObj: {},
+        nextLaunchObj: {},
         past_launch_arr: [],
         isLoading: true
     };
@@ -17,17 +18,11 @@ export default class Launches extends  React.Component {
 
         
         getNextLaunch().then(res => {
-                const launchObj = {  
-                    "mission_name": "",
-                    "mission_info": "",
-                    "mission_id": "",
-                    "rocket_name": ""
-                }
-                launchObj.mission_name = res.data.mission_name;
-                launchObj.mission_info = res.data.details;
-                launchObj.mission_id = res.data.mission_id[0];
-                launchObj.rocket_name = res.data.rocket.rocket_name;
-                this.setState({ launchObj });
+                nextLaunchObj.mission_name = res.data.mission_name;
+                nextLaunchObj.mission_info = res.data.details;
+                nextLaunchObj.mission_id = res.data.mission_id[0];
+                nextLaunchObj.rocket_name = res.data.rocket.rocket_name;
+                this.setState({ nextLaunchObj });
           });
 
 
@@ -49,10 +44,10 @@ export default class Launches extends  React.Component {
                 <h2>Prochain lancement</h2>
                 <div className="content-element width-850 first">
                     <img src="assets/img/rocket-big.png" className="rocket-big-img" alt="rocket big"/>
-                    <p><span className="bold"> Code de la mission : </span>   {this.state.launchObj.mission_id}</p>
-                    <p><span className="bold"> Nom de la mission : </span> {this.state.launchObj.mission_name}</p>
-                    <p><span className="bold"> Information de la mission :  </span> {this.state.launchObj.mission_info}</p>
-                    <p><span className="bold"> Lanceur :  </span> {this.state.launchObj.rocket_name}</p>  
+                    <p><span className="bold"> Code de la mission : </span>   {this.state.nextLaunchObj.mission_id}</p>
+                    <p><span className="bold"> Nom de la mission : </span> {this.state.nextLaunchObj.mission_name}</p>
+                    <p><span className="bold"> Information de la mission :  </span> {this.state.nextLaunchObj.mission_info}</p>
+                    <p><span className="bold"> Lanceur :  </span> {this.state.nextLaunchObj.rocket_name}</p>  
                 </div>
 
     
