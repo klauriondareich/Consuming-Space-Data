@@ -11,19 +11,34 @@ export default class AllLaunches extends  React.Component {
         searchItem: "",
         filteredItem: "",
         type: "search",
-        count: 9,
+        page: 0
     }
 
     componentDidMount() {
 
             // Get all launches
-            getAllLaunches().then(res => {
-                const all_launches = res.data;
-              // console.log(res.data);
-                this.setState({ all_launches });
+            getAllLaunches(this.state.page).then(res => {
+               
+                this.setState((previous) => ({
+                    all_launches: [...previous.all_launches, ...res.data]
+                }));
                 this.setState({isLoading: false});
           })
       }
+
+    componentDidUpdate(prevProps, previous) {
+		if (previous.page !== this.state.page) {
+            this.setState({isLoading: true});
+			this.componentDidMount();
+		}
+	}
+
+    displayMore = () => {
+		this.setState((previous) => ({
+			page: previous.page + 1
+		}));
+	};
+
     render(){
         return(
 
@@ -52,9 +67,6 @@ export default class AllLaunches extends  React.Component {
             </select>   
             <br/><br/>
 
-            <div className={this.state.isLoading ? 'show marg-left-500' : 'hide'}>
-                <Loader type="spinner-default" bgColor={"#0064c2"} color={'#fff'} size={40} />           
-            </div>
 
             {this.state.all_launches.filter((data) => {
                 
@@ -78,7 +90,7 @@ export default class AllLaunches extends  React.Component {
                     }
                 }
             })
-            .slice(0, this.state.count).map((item, index) => 
+            .map((item, index) => 
                 <div className="content-element width-300" key={index}>
                     <img src="assets/img/rocket.png" alt="rocket"/>
                     <p>Nom de la mission : {item.mission_name}</p>
@@ -87,17 +99,12 @@ export default class AllLaunches extends  React.Component {
                 </div>
             )}
             <br/>
-            <button className="mg-left" onClick={(event) =>{
-                let count = this.state.count;
-                count = count + 9;
-                this.setState({count});
-            }}>Afficher Plus</button>
+            
+            <div className={this.state.isLoading ? 'show marg-left-500' : 'hide'}>
+                <Loader type="spinner-default" bgColor={"#0064c2"} color={'#fff'} size={40} />           
+            </div>
 
-            <button onClick={(event) =>{
-                let count = this.state.count;
-                count = count - 9;
-                this.setState({count});
-            }}>Afficher Moins</button>
+            <button className="mg-left" onClick={this.displayMore}>Afficher Plus</button>
             
         </div>
         )

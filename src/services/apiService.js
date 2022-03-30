@@ -4,7 +4,7 @@ let base_path = "https://api.spacex.land/";
 
 let fullPath_1 = base_path + "rest/launch-next";
 let fullPath_2 = base_path + "rest/launches-past?limit=4";
-let fullPath_3 = base_path + "rest/launches?limit=27";
+
 
         
 // Getting next launch data
@@ -18,7 +18,8 @@ export function getPastLaunches(){
 }
 
 // Getting all launches data
-export function getAllLaunches(){
+export function getAllLaunches(pageNum){
+    let fullPath_3 = base_path + `rest/launches/?page=${pageNum}&limit=10`;
     return axios.get(fullPath_3)
 }
 
