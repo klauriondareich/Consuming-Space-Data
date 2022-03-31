@@ -97,13 +97,13 @@ export default class AllLaunches extends  React.Component {
 
             <button className="mg-left" onClick={(event) =>{
                 let count = this.state.count;
-                count = count + 9;
+                count = count + 10;
                 this.setState({count});
             }}>Afficher Plus</button>
 
-            <button onClick={(event) =>{
+            <button className={this.state.count !== 10 ? 'show-btn' : 'hide'} onClick={(event) =>{
                 let count = this.state.count;
-                count = count - 9;
+                count = count - 10;
                 this.setState({count});
             }}>Afficher Moins</button>            
         </div>

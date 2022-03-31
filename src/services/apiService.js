@@ -20,7 +20,6 @@ export function getPastLaunches(){
 // Getting all launches data
 export function getAllLaunches(pageNum){
     let fullPath_3 = base_path + `rest/launches/?limit=40`;
-    console.log("page", pageNum);
     return axios.get(fullPath_3)
 }
 
