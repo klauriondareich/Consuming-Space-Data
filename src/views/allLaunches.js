@@ -11,7 +11,7 @@ export default class AllLaunches extends  React.Component {
         searchItem: "",
         filteredItem: "",
         type: "search",
-        page: 0
+        count: 10
     }
 
     componentDidMount() {
@@ -25,19 +25,6 @@ export default class AllLaunches extends  React.Component {
                 this.setState({isLoading: false});
           })
       }
-
-    componentDidUpdate(prevProps, previous) {
-		if (previous.page !== this.state.page) {
-            this.setState({isLoading: true});
-			this.componentDidMount();
-		}
-	}
-
-    displayMore = () => {
-		this.setState((previous) => ({
-			page: previous.page + 1
-		}));
-	};
     
 
     render(){
@@ -92,6 +79,7 @@ export default class AllLaunches extends  React.Component {
                     }
                 }
             })
+            .slice(0, this.state.count)
             .map((item, index) => 
                 <div className="content-element width-300" key={index}>
                     <img src="assets/img/rocket.png" alt="rocket"/>
@@ -107,8 +95,17 @@ export default class AllLaunches extends  React.Component {
                 <Loader type="spinner-default" bgColor={"#0064c2"} color={'#fff'} size={40} />           
             </div>
 
-            <button className="mg-left" onClick={this.displayMore}>Afficher Plus</button>
-            
+            <button className="mg-left" onClick={(event) =>{
+                let count = this.state.count;
+                count = count + 9;
+                this.setState({count});
+            }}>Afficher Plus</button>
+
+            <button onClick={(event) =>{
+                let count = this.state.count;
+                count = count - 9;
+                this.setState({count});
+            }}>Afficher Moins</button>            
         </div>
         )
     }
