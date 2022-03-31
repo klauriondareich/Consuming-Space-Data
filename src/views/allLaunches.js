@@ -11,20 +11,26 @@ export default class AllLaunches extends  React.Component {
         searchItem: "",
         filteredItem: "",
         type: "search",
-        count: 10
+        count: 10,
+        pending: " "
     }
 
+    loadLaunches(order){
+        console.log(this.state.isLoading)
+        getAllLaunches(order).then(res => {
+             this.setState({all_launches: res.data});
+             this.setState({isLoading: false});
+             this.setState({pending: " "});
+       })
+    }
+    
     componentDidMount() {
 
-            // Get all launches
-            getAllLaunches(this.state.page).then(res => {
-               //console.log(res.data);
-                this.setState((previous) => ({
-                    all_launches: [...previous.all_launches, ...res.data]
-                }));
-                this.setState({isLoading: false});
-          })
+        // Get all launches 
+        this.loadLaunches("desc");
       }
+
+     
     
 
     render(){
@@ -39,7 +45,7 @@ export default class AllLaunches extends  React.Component {
                 this.setState({searchItem: event.target.value});
             }}/> 
 
-            <label htmlFor="years">Filtrer par année :</label>
+            <label htmlFor="years">Filtrer par année : </label>
             <select name="years" id="years" onChange={(event) =>{
                 this.setState({type: "filter"});
                 this.setState({filteredItem: event.target.value});
@@ -54,8 +60,20 @@ export default class AllLaunches extends  React.Component {
                 <option value="2013">2013</option>
                 <option value="2010">2010</option>
             </select>   
-            <br/><br/>
 
+            <label htmlFor="date" className="mg-left">Trier par : </label>
+            <select name="date" id="date" onChange={(event) =>{
+                this.setState({pending: "...Request pending"});
+                this.loadLaunches(event.target.value);
+            }}>
+                <option value="desc">Pus récents - Moins récents</option>
+                <option value="asc">Moins récents - Plus récents</option>
+            </select>   
+
+
+            <br/><br/>
+            <p className="green">{this.state.pending}</p>
+            
 
             {this.state.all_launches.filter((data) => {
                 
