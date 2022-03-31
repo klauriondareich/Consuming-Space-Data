@@ -18,8 +18,8 @@ export function getPastLaunches(){
 }
 
 // Getting all launches data
-export function getAllLaunches(pageNum){
-    let fullPath_3 = base_path + `rest/launches/?limit=40`;
+export function getAllLaunches(order){
+    let fullPath_3 = base_path + `rest/launches/?sort=launch_date_local&order=${order}`;
     return axios.get(fullPath_3)
 }
 
